@@ -3,6 +3,7 @@ package com.example.swifterchatapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -24,11 +25,18 @@ public class LoginActivity extends AppCompatActivity {
     TextView signIn_btn;
     FirebaseAuth auth;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        progressDialog=new ProgressDialog(this);
+        progressDialog.setMessage("Please wait...");
+        progressDialog.setCancelable(false);
+
+        auth = FirebaseAuth.getInstance();
 
         txt_signup = findViewById(R.id.txt_signup);
         signIn_btn = findViewById(R.id.signIn_btn);
@@ -40,17 +48,22 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                progressDialog.show();
+
                 String email = login_email.getText().toString();
                 String password = login_password.getText().toString();
 
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                    progressDialog.dismiss();
                     Toast.makeText(LoginActivity.this, "Enter valid data", Toast.LENGTH_SHORT).show();
                 }
                 else if(!email.matches(emailPattern)){
+                    progressDialog.dismiss();
                     login_email.setError("Invalid Email");
                     Toast.makeText(LoginActivity.this, "Invalid Email", Toast.LENGTH_SHORT).show();
                 }
                 else if(password.length()<6){
+                    progressDialog.dismiss();
                     login_password.setError("Invalid Password");
                     Toast.makeText(LoginActivity.this, "Please enter valid password", Toast.LENGTH_SHORT).show();
                 }
@@ -59,6 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
+                                progressDialog.dismiss();
                                 startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                             }
                             else {

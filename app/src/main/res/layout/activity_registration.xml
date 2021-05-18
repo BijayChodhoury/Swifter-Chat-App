@@ -33,6 +33,7 @@
             app:civ_border_color="#FF000000"/>
 
         <EditText
+            android:id="@+id/reg_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -47,6 +48,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/reg_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -61,6 +63,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/reg_pass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -76,6 +79,7 @@
             android:textColor="@color/black"/>
 
         <EditText
+            android:id="@+id/reg_cPass"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_10sdp"
@@ -91,6 +95,7 @@
             android:textColor="@color/black"/>
 
         <TextView
+            android:id="@+id/btn_signup"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
